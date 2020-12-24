@@ -1,0 +1,191 @@
+Script started on 2020-12-24 17:25:08+0000
+
+                    while(true) {
+                        try{
+                            sh "curl -s ${GRAND_MASTER_PUBLIC_IP}:8080"
+                            echo "${APP_NAME} app is successfully deployed."
+                            break
+                        }
+                        catch(Exception){
+                            echo "Could not connect to ${APP_NAME} app"
+                            sleep(5)
+                        }
+   ]0;ec2-user@jenkins-server:~/petclinic-microservices[?1034h[ec2-user@jenkins-server petclinic-microservices]$ 
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$                     while(true) {
+bash: syntax error near unexpected token `{'
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$                         try{
+bash: try{: command not found
+                 }
+                }
+            }]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$                             sh "curl -s ${GRAND_MASTER_PUBLIC_IP}:8080"
+sh: curl -s :8080: No such file or directory
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$                             echo "${APP_NAME} app is successfully deployed."
+ app is successfully deployed.
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$                             break
+bash: break: only meaningful in a `for', `while', or `until' loop
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$                         }
+bash: syntax error near unexpected token `}'
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$                         catch(Exception){
+bash: syntax error near unexpected token `Exception'
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$                             echo "Could not connect to ${APP_NAME} app"
+Could not connect to  app
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$                             sleep(5)
+bash: syntax error near unexpected token `5'
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$                         }
+bash: syntax error near unexpected token `}'
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$                     }
+bash: syntax error near unexpected token `}'
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$                 }
+bash: syntax error near unexpected token `}'
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$             }
+bash: syntax error near unexpected token `}'
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$         }
+bash: syntax error near unexpected token `}'
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$ 
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$         stage('Run QA Automation Tests'){
+bash: syntax error near unexpected token `'Run QA Automation Tests''
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$             steps {
+bash: steps: command not found
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$                 echo "Run the Selenium Functional Test on QA Environment"
+Run the Selenium Functional Test on QA Environment
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$                 sh 'ansible-playbook -vvv --connection=local --inventory 127.0.0.1, --extra-vars "w orkspace=${WORKSPACE} master_public_ip=${GRAND_MASTER_PUBLIC_IP}" ./ansible/playbooks/pb_run_selenium_jobs.yaml'
+sh: ansible-playbook -vvv --connection=local --inventory 127.0.0.1, --extra-vars "workspace=${WORKSPACE} master_public_ip=${GRAND_MASTER_PUBLIC_IP}" ./ansible/playbooks/pb_run_selenium_jobs.yaml: No such file or directory
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$             }
+bash: syntax error near unexpected token `}'
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$         }
+bash: syntax error near unexpected token `}'
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$     }
+bash: syntax error near unexpected token `}'
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$ 
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$     post {
+bash: post: command not found
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$         always {
+bash: always: command not found
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$             echo 'Deleting all local images'
+Deleting all local images
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$             sh 'docker image prune -af'
+sh: docker image prune -af: No such file or directory
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$             echo 'Delete the Image Repository on ECR'
+Delete the Image Repository on ECR
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$             sh """
+>                 aws ecr delete-repository \
+>                   --repository-name ${APP_REPO_NAME} \
+>                   --region ${AWS_REGION}\
+>                   --force
+>                 """
+sh: 
+                aws ecr delete-repository                   --repository-name                    --region                   --force
+                : No such file or directory
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$             echo 'Tear down the Docker Swarm infrastructure using AWS CLI'
+Tear down the Docker Swarm infrastructure using AWS CLI
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$             sh "aws cloudformation delete-stack --region ${AWS_REGION} --stack-name ${APP_STACK_NAM E}"
+sh: aws cloudformation delete-stack --region  --stack-name : No such file or directory
+    echo "Delete existing key pair using AWS CLI"
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$             echo "Delete existing key pair using AWS CLI"
+Delete existing key pair using AWS CLI
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$             sh "aws ec2 delete-key-pair --region ${AWS_REGION} --key-name ${CFN_KEYPAIR}"
+sh: aws ec2 delete-key-pair --region  --key-name : No such file or directory
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$             sh "rm -rf ${CFN_KEYPAIR}"
+sh: rm -rf : No such file or directory
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$         }
+bash: syntax error near unexpected token `}'
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$     }
+bash: syntax error near unexpected token `}'
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$ }
+bash: syntax error near unexpected token `}'
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$ }    }    }    sh "rm -rf ${CFN_KEYPAIR}"[51@aws ec2 delete-key-pair --region ${AWS_REGION} --key-name[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[32Pecho "Delete existing key pair using AWS CLI"sh "aws cloudformation delete-stack --region ${AWS_REGION} --stack-name ${APP_STACK_NAMEE}"[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[42Pecho "Delete existing key pair using AWS CLI"
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csh "aws ec2 delete-key-pair --region ${AWS_REGION} --key-name ${CFN_KEYPAIR}"[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Crm -rf ${CFN_KEYPAIR}"[K}[K}[K}[K[Kgit commit -am "sh "ansible-inventory -v -i ./ansible/inventory/dev_stack_dynamic_inventory_aws_ec2 .yaml --graph"
+> "
+error: unknown option `graph
+'
+usage: git commit [<options>] [--] <pathspec>...
+
+    -q, --quiet           suppress summary after successful commit
+    -v, --verbose         show diff in commit message template
+
+Commit message options
+    -F, --file <file>     read message from file
+    --author <author>     override author for commit
+    --date <date>         override date for commit
+    -m, --message <message>
+                          commit message
+    -c, --reedit-message <commit>
+                          reuse and edit message from specified commit
+    -C, --reuse-message <commit>
+                          reuse message from specified commit
+    --fixup <commit>      use autosquash formatted message to fixup specified commit
+    --squash <commit>     use autosquash formatted message to squash specified commit
+    --reset-author        the commit is authored by me now (used with -C/-c/--amend)
+    -s, --signoff         add Signed-off-by:
+    -t, --template <file>
+                          use specified template file
+    -e, --edit            force edit of commit
+    --cleanup <mode>      how to strip spaces and #comments from message
+    --status              include status in commit message template
+    -S, --gpg-sign[=<key-id>]
+                          GPG sign commit
+
+Commit contents options
+    -a, --all             commit all changed files
+    -i, --include         add specified files to index for commit
+    --interactive         interactively add files
+    -p, --patch           interactively add changes
+    -o, --only            commit only specified files
+    -n, --no-verify       bypass pre-commit and commit-msg hooks
+    --dry-run             show what would be committed
+    --short               show status concisely
+    --branch              show branch information
+    --ahead-behind        compute full ahead/behind values
+    --porcelain           machine-readable output
+    --long                show status in long format (default)
+    -z, --null            terminate entries with NUL
+    --amend               amend previous commit
+    --no-post-rewrite     bypass post-rewrite hook
+    -u, --untracked-files[=<mode>]
+                          show untracked files, optional modes: all, normal, no. (Default: all)
+
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$ git commit -am "sh "ansible-inventory -v -i ./ansible/inventory/dev_stack_dynamic_inventory_aws_ec2..yaml --graph"
+"[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K
+[K[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cgi
+bash: gi: command not found
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$ git status
+On branch feature/msp-17-spare
+Your branch is up to date with 'origin/feature/msp-17-spare'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	[31mmodified:   jenkins/jenkinsfile-petclinic-nightly[m
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	[31m{[m
+
+no changes added to commit (use "git add" and/or "git commit -a")
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$ git status[Kt commit -am "sh "ansible-inventory -v -i ./ansible/inventory/dev_stack_dynamic_inventory_aws_ec2..yaml --graph"
+"[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C}[K
+[K
+[K[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C    }}[Kgit commit -am "sh "ansible-inventory -v -i ./ansible/inventory/dev_stack_dynamic_inventory_aws_ec2..yaml --graph"
+"[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[C[C[C[C[C[C[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csh "ansible-inventory -v -i ./ansible/inventory/dev_stack_dynamic_inventory_aws_ec2.y[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C2sh "ansible-inventory -v -i ./ansible/inventory/dev_stack_dynamic_inventory_aws_ec2.[1@y[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csh "ansible-inventory -v -i ./ansible/inventory/dev_stack_dynamic_inventory_aws_ec2.y[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C£sh "ansible-inventory -v -i ./ansible/inventory/dev_stack_dynamic_inventory_aws_ec2.[1@y[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csh "ansible-inventory -v -i ./ansible/inventory/dev_stack_dynamic_inventory_aws_ec2.y[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C`sh "ansible-inventory -v -i ./ansible/inventory/dev_stack_dynamic_inventory_aws_ec2.[1@y[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csh "ansible-inventory -v -i ./ansible/inventory/dev_stack_dynamic_inventory_aws_ec2.y[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C'sh "ansible-inventory -v -i ./ansible/inventory/dev_stack_dynamic_inventory_aws_ec2.[1@y[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ct commit -am 'sh "ansible-inventory -v -i ./ansible/inventory/dev_stack_dynamic_inventory_aws_ec2..yaml --graph"'
+[feature/msp-17-spare 98db1d4] sh "ansible-inventory -v -i ./ansible/inventory/dev_stack_dynamic_inventory_aws_ec2.yaml --graph"
+ 1 file changed, 1 deletion(-)
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$ git push
+[KEnumerating objects: 7, done.
+[KCounting objects:  14% (1/7)[KCounting objects:  28% (2/7)[KCounting objects:  42% (3/7)[KCounting objects:  57% (4/7)[KCounting objects:  71% (5/7)[KCounting objects:  85% (6/7)[KCounting objects: 100% (7/7)[KCounting objects: 100% (7/7), done.
+Delta compression using up to 2 threads
+[KCompressing objects:  25% (1/4)[KCompressing objects:  50% (2/4)[KCompressing objects:  75% (3/4)[KCompressing objects: 100% (4/4)[KCompressing objects: 100% (4/4), done.
+[KWriting objects:  25% (1/4)[KWriting objects:  50% (2/4)[KWriting objects:  75% (3/4)[KWriting objects: 100% (4/4)[KWriting objects: 100% (4/4), 405 bytes | 405.00 KiB/s, done.
+Total 4 (delta 3), reused 0 (delta 0)
+remote: Resolving deltas:   0% (0/3)[Kremote: Resolving deltas:  33% (1/3)[Kremote: Resolving deltas:  66% (2/3)[Kremote: Resolving deltas: 100% (3/3)[Kremote: Resolving deltas: 100% (3/3), completed with 3 local objects.[K
+To https://github.com/james-clarusway/petclinic-microservices.git
+   f950e07..98db1d4  feature/msp-17-spare -> feature/msp-17-spare
+]0;ec2-user@jenkins-server:~/petclinic-microservices[ec2-user@jenkins-server petclinic-microservices]$ [H[2J[ec2-user@jenkins-server petclinic-microservices]$ ls
+{                             docker-compose.yml  mvnw.cmd                       [0m[38;5;27mspring-petclinic-api-gateway[0m        [38;5;27mspring-petclinic-visits-service[0m
+[38;5;27mansible[0m                       [38;5;27mdocs[0m                package-with-mvn-wrapper.sh    [38;5;27mspring-petclinic-config-server[0m      test-local-deployment.sh
+build-dev-docker-images.sh    [38;5;27minfrastructure[0m      pom.xml                        [38;5;27mspring-petclinic-customers-service[0m
+[38;5;27mdocker[0m                        [38;5;27mjenkins[0m             README.md                      [38;5;27mspring-petclinic-discovery-server[0m
+docker-compose-local.yml      LICENSE             [38;5;27mselenium-jobs[0m                  [38;5;27mspring-petclinic-hystrix-dashboard[0m
+docker-compose-swarm-dev.yml  [38;5;34mmvnw[0m                [38;5;27mspring-petclinic-admin-s
